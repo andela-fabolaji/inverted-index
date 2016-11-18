@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title>Inverted Index</title>
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="public/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="public/lib/font-awesome/css/font-awesome.min.css" />
+    <!-- endbower -->
+
+    <!-- bower:js -->
+    <script src="public/lib/jquery/dist/jquery.js"></script>
+    <script src="public/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="public/css/style.css">
+    <!-- endinject -->
+</head>
+<body>
+    <div>
+        <input type="text" ng-model="myname" name="name">
+        <h1>{{ myname }}</h1>
+    </div>
+
+    <!--inject:js-->
+    <script src="public/js/angular.min.js"></script>
+    <script src="src/inverted-index.js"></script>
+    <script src="src/main.js"></script>
+    <!--endinject-->
+</body>
+</html>

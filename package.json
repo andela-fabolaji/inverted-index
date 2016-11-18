@@ -1,0 +1,42 @@
+{
+  "name": "inverted-index",
+  "version": "1.0.0",
+  "description": "A light-weight full-text search app that uses elastic search",
+  "main": "main.js",
+  "scripts": {
+    "start": "gulp",
+    "test": "karma start karma.conf.js --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-fabolaji/inverted-index.git"
+  },
+  "keywords": [
+    "text",
+    "search"
+  ],
+  "author": "Abolaji Femi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-fabolaji/inverted-index/issues"
+  },
+  "homepage": "https://github.com/andela-fabolaji/inverted-index#readme",
+  "devDependencies": {
+    "coveralls": "^2.11.15",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "jasmine-core": "^2.5.2",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "wiredep": "^4.0.0"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}
