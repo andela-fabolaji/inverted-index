@@ -3,7 +3,8 @@
 const gulp    = require('gulp'),
       jshint  = require('gulp-jshint'),
       jscs    = require('gulp-jscs'),
-      connect = require('gulp-connect');
+      connect = require('gulp-connect'),
+      run     = require('gulp-run');
 
 const paths = {
   jsFiles: ['./src/inverted-index.js', './src/main.js'],
@@ -76,6 +77,10 @@ gulp.task('reloadServer', () => {
 });
 
 //test
+gulp.task('test', () => {
+  return run('./node_modules/karma/bin/karma start karma.conf.js --single-run').exec();
+});
+
 gulp.task('testWatch', () => {
   gulp.watch(paths.testFiles, ['testReload']);
 });

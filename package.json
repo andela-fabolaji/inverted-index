@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "gulp",
-    "test": "karma start karma.conf.js --single-run"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -28,11 +28,13 @@
     "gulp-inject": "^4.1.0",
     "gulp-jscs": "^4.0.0",
     "gulp-jshint": "^2.0.4",
+    "gulp-run": "^1.7.1",
     "jasmine-core": "^2.5.2",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
     "karma": "^1.3.0",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.0.2",
     "wiredep": "^4.0.0"
   },

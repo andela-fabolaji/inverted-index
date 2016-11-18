@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sun Nov 13 2016 23:38:58 GMT+0100 (WAT)
+// Generated on Fri Nov 18 2016 13:04:18 GMT+0100 (WAT)
 
 module.exports = function(config) {
   config.set({
@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/*.js ', 'jasmine/spec/*.js'
+      'src/inverted-index.js', 'jasmine/spec/inverted-index-test.js'
     ],
 
 
@@ -27,6 +27,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'src/inverted-index.js': ['coverage']
+    },
+
+
+    coverageReporter: {
+      type: 'lcov',
+      dir: 'coverage/'
     },
 
 
