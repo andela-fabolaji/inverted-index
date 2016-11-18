@@ -1,3 +1,168 @@
+* {
+  margin: 0 auto;
+  padding: 0;
+}
+
+/*
+  COLOUR
+  bg color = #ebeff1 / rgb(235, 239, 241) - grey
+  primary color = #2856b6 - blue
+*/
+
+html {
+  font-size: 100% !important;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  background-color: #f6f6f6;
+  background: #ebeff1;
+}
+
+div {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+button, input[type=text], select {
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+}
+
+.header {
+  height: 70px;
+  width: 100%;
+  background-color: #2556b6;
+  padding-top: 10px;
+}
+
+.brand {
+  position: absolute;
+  left: 20px;
+  padding-top: 10px;
+}
+
+.brand > span {
+  font-size: 1.5em;
+  color: #fff;
+  display: block;
+}
+
+.search-holder {
+  width: 700px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.search-holder > div {
+  float: left;
+  height: 50px;
+}
+
+.search-box {}
+
+.icon-font {
+  color: #fff;
+  font-size: 1.2em;
+}
+
+.search-box > input[type=text] {
+  width: 450px;
+  height: 50px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding-left: 50px;
+  transition: ease-in 0.3s all;
+}
+
+.search-box > input[type=text]:focus {
+  background-color: rgba(255, 255, 255, 1);
+  color: #000;
+  font-size: 1.7em;
+}
+
+.drop-down {
+  width:150px;
+  padding-top: 10px;
+  background: #fff;
+}
+
+.drop-down > select {
+  height: 30px;
+  width: 150px;
+  border-radius: 0;
+  padding-left: 10px;
+  background-color: #fff;
+  transition: ease-in 0.3s all;
+  border-left: 1px solid #c6c6c6;
+}
+
+.button {
+  width: 100px;
+}
+
+.button > button {
+  width: 100%;
+  height: 50px;
+  background-color: #194297;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #fff;
+}
+
+.button > button:hover {
+  background-color: #10388a;
+}
+
+.intro {
+  height: 50px;
+  width: 100%;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.08);
+  padding-top: 15px;
+  box-sizing: border-box;
+}
+
+.intro > span {
+  font-size: 1.0em;
+  display: block;
+}
+
+/*------------------------------------------------------*/
+/* main body */
+/*------------------------------------------------------*/
+
+.left-pane {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 280px;
+  height: 100vh;
+  float: left;
+  border-right: 1px solid #e1e1e1;
+}
+
+.left-pane > h3, h4 { margin-bottom: 20px;}
+
+.left-pane > span.about {
+  display: block;
+  width: 250px;
+  float: left;
+  font-size: 0.9em;
+  text-align: justify;
+  line-height: 1.6em;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.content {
+
 }

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html ng-app>
+<html lang="en" ng-app="invertedIndex">
 <head>
     <title>Inverted Index</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- bower:css -->
     <link rel="stylesheet" href="public/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -18,10 +21,43 @@
     <!-- endinject -->
 </head>
 <body>
-    <div>
-        <input type="text" ng-model="myname" name="name">
-        <h1>{{ myname }}</h1>
+    <!-- header -->
+    <div class="header container-fluid">
+        <div class="brand">
+            <!--<img src="public/img/invIndex.png" alt="">-->
+            <span>Inverted App</span>
+        </div>
+        <div class="search-holder">
+            <div class="search-box">
+                <input type="text" name="query"/>
+            </div>
+            <div class="drop-down">
+                <select name="option" id="">
+                    <option value="">All</option>
+                    <option value="">Alice.json</option>
+                    <option value="">The Orbit.json</option>
+                    <option value="">Stuff.json</option>
+                </select>
+            </div>
+            <div class="button"><button><i class="fa fa-search" aria-hidden="true"></i></button></div>
+        </div>
     </div>
+    <div class="intro">
+        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+    </div>
+    <!-- endheader -->
+
+    <!-- body -->
+    <div class="left-pane">
+        <h3>About this App</h3>
+        <span class="about">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.
+        </span>
+        <h4>Usage</h4>
+
+    </div>
+    <div class="content"></div>
+    <!-- body -->
 
     <!--inject:js-->
     <script src="public/js/angular.min.js"></script>
