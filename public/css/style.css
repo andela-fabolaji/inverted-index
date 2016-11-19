@@ -139,7 +139,7 @@ button, input[type=text], select {
 /*------------------------------------------------------*/
 
 .left-pane {
-  margin-top: 20px;
+  margin-top: 50px;
   margin-left: 20px;
   width: 280px;
   height: 100vh;
@@ -154,7 +154,7 @@ button, input[type=text], select {
   width: 250px;
   float: left;
   font-size: 0.9em;
-  text-align: justify;
+  text-align: left;
   line-height: 1.6em;
   border-top: 1px solid #e1e1e1;
   border-bottom: 1px solid #e1e1e1;
@@ -164,5 +164,16 @@ button, input[type=text], select {
 }
 
 .content {
+  margin-top: 50px;
+  width: 960px;
+  min-height: 550px;
+  float: right;
+}
 
+.upload-space {
+  width: 90%;
+  height: 70px;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.08);
 }
