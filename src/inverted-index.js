@@ -11,6 +11,7 @@ class InvertedIndex {
    */
   constructor() {
     this.indeces = {};
+    this.indexed = {}
   }
 
   /**
@@ -42,7 +43,7 @@ class InvertedIndex {
     });
 
     if (!this.indeces.hasOwnProperty(fileName)) this.indeces[fileName] = indexed;
-
+    this.indexed[fileName] = file;
     return true;
   }
 
@@ -86,6 +87,16 @@ class InvertedIndex {
     return result;
   }
 
+  getDocCount(filename) {
+    let docs = [],
+    file = this.indexed[filename];
+
+    for (let i = 0; i < (Object.keys(file)).length - 1; i++) {
+      docs.push(i)
+    }
+    return docs;
+  } 
+
   /**
    * _verifyFile private method checks for validity of json file
    *
@@ -94,11 +105,11 @@ class InvertedIndex {
    */
 	_verifyFile(file) {
 
-    try {
-      file = JSON.parse(file);
-    } catch(exception) {
-      return false;
-    }
+    // try {
+    //   file = JSON.parse(file);
+    // } catch(exception) {
+    //   return false;
+    // }
 
     let flag = file;
 

@@ -2,37 +2,37 @@
 
 describe('Inverted Index class test suite', function () {
 
-  var invIndex; 
+  var invIndex;
 
   // valid files
-  var file1 = '[\
-    {\
-      "title": "Alice in Wonderland",\
-      "text": "Alice falls into a rabbit hole and enters a world full of imagination."\
-    },\
-    {\
-      "title": "The Lord of the Rings: The Fellowship of the Ring.",\
-      "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."\
-    }\
-  ]';
+  var file1 = [
+    {
+      "title": "Alice in Wonderland",
+      "text": "Alice falls into a rabbit hole and enters a world full of imagination."
+    },
+    {
+      "title": "The Lord of the Rings: The Fellowship of the Ring.",
+      "text": "An unusual alliance of man, elf, dwarf, wizard and hobbit seek to destroy a powerful ring."
+    }
+  ];
 
-  var file2 = '[\
-    {\
-      "title": "Black Panther",\
-      "text": "Tchalla, a wakandian king gets up to hijinks"\
-    },\
-    {\
-      "title": "Constantine: HellBlazer",\
-      "text": "One man stands between Heaven and Hell. He may be our last hope or a failure"\
-    },\
-    {\
-      "title": "Batman: Year One",\
-      "text": "A rookie BatMan, Fresh from the League of Assasins tries to find his way"\
-    }\
-  ]';
-    
-  // invalid files 
-  var file3 = '[]';
+  var file2 = [
+    {
+      "title": "Black Panther",
+      "text": "Tchalla, a wakandian king gets up to hijinks"
+    },
+    {
+      "title": "Constantine: HellBlazer",
+      "text": "One man stands between Heaven and Hell. He may be our last hope or a failure"
+    },
+    {
+      "title": "Batman: Year One",
+      "text": "A rookie BatMan, Fresh from the League of Assasins tries to find his way"
+    }
+  ];
+
+  // invalid files
+  var file3 = [];
 
   beforeEach(function () {
     invIndex = new InvertedIndex();
@@ -49,7 +49,7 @@ describe('Inverted Index class test suite', function () {
       it('Should be an object type', function () {
         expect(typeof invIndex).toBe('object');
       });
-      
+
       it('Should not have any books indexed yet', function () {
         let newInvIndex = new InvertedIndex();
         expect((Object.keys(newInvIndex.indeces)).length).toBeFalsy();
@@ -72,7 +72,7 @@ describe('Inverted Index class test suite', function () {
 
       it('Should return false if file is empty and/or not a JSON file', function () {
         result = invIndex.createIndex('file3', file3);
-        expect(result).toBeFalsy(); 
+        expect(result).toBeFalsy();
       });
 
     });
@@ -89,7 +89,7 @@ describe('Inverted Index class test suite', function () {
       });
 
       it('Should return correct index', function () {
-        let key = Object.keys(invIndex.getIndex('file1'))[0]; 
+        let key = Object.keys(invIndex.getIndex('file1'))[0];
         expect(invIndex.getIndex('file1')[key].length).toEqual(1);
       });
 

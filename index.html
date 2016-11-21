@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="invertedIndex">
+<html lang="en" ng-app="InvertedIndex">
 <head>
     <title>Inverted Index</title>
 
@@ -20,29 +20,34 @@
     <link rel="stylesheet" href="public/css/style.css">
     <!-- endinject -->
 </head>
-<body>
+<body ng-controller="MainController">
+
     <!-- header -->
     <div class="header container-fluid">
         <div class="brand">
-            <!--<img src="public/img/invIndex.png" alt="">-->
             <span>Inverted App</span>
         </div>
         <div class="search-holder">
             <div class="search-box">
-                <input type="text" name="query"/>
+                <input type="text" name="query" ng-model="searchQuery"/>
             </div>
             <div class="drop-down">
-                <select name="option" id="">
+                <select ng-model="searchFile" ng-options="key as key for (key, value) in uploadedFiles">
                     <option value="">All</option>
-                    <option value="">Alice.json</option>
-                    <option value="">The Orbit.json</option>
-                    <option value="">Stuff.json</option>
                 </select>
             </div>
-            <div class="button"><button><i class="fa fa-search" aria-hidden="true"></i></button></div>
+            <div class="button"><button type="button" ng-click="searchIndex()"><i class="fa fa-search" aria-hidden="true"></i></button></div>
         </div>
     </div>
     <div class="intro">
+
+    <!--
+    <div class="alert alert-danger alert-dismissable fade in msg-box">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+    </div>
+    -->
+
         <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
     </div>
     <!-- endheader -->
@@ -54,12 +59,64 @@
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.
         </span>
         <h4>Usage</h4>
-
+        <p>
+            Uploads
+            <ul>
+                <li>Upload JSON file</li>
+                <li>Click Create Index</li>
+            </ul>
+        </p>
+        <p>
+            Search
+            <ul>
+                <li>Enter search term(s)</li>
+                <li>Click search</li>
+            </ul>
+        </p>
     </div>
     <div class="content">
-        <div class="upload-space">
-            <!--<input type="file" id="fileInput" multiple="multiple">-->
+        <div class="upload-area">
+            <div class="upload-div">
+                <label for="upload" class="upload">
+                <i class="fa fa-plus fa-2x"></i>&nbsp;<span>Upload File</span>
+                <input type="file" multiple id="upload" name="upload">
+                </label>
+            </div>
+            <div class="drop-down-div">
+                <select ng-model="selectedFile" ng-options="key as key for (key, value) in uploadedFiles">
+                    <option value="">-- Select File --</option>
+                </select>
+            </div>
+            <div class="button">
+                <button type="button" ng-click="createIndex()">Create Index</button>
+            </div>
         </div>
+
+        <!-- table -->
+        <div class="table-display" ng-if="showIndex">
+            <span ng-if="showIndex">Showing index for {{indexedFile}}</span>
+            <span ng-if="showResult">Showing result for {{indexedFile}}</span>
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Token</th>
+                        <th ng-repeat="key in docsLength" style="text-align: center;">
+                            Document {{key + 1}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="keys in indexKeys">
+                        <td>{{keys}}</td>
+                        <td ng-repeat="i in docsLength" style="text-align: center;">
+                            <span ng-if="result[keys].includes(i)"><i class="fa fa-check"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- endtable -->
     </div>
     <!-- body -->
 
