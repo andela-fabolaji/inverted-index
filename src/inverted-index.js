@@ -91,11 +91,11 @@ class InvertedIndex {
     let docs = [],
     file = this.indexed[filename];
 
-    for (let i = 0; i < (Object.keys(file)).length - 1; i++) {
+    for (let i = 0; i < (Object.keys(file)).length; i++) {
       docs.push(i)
     }
     return docs;
-  } 
+  }
 
   /**
    * _verifyFile private method checks for validity of json file

@@ -148,7 +148,7 @@ button, input[type=text], select {
 
 .left-pane {
   margin-top: 50px;
-  margin-left: 20px;
+  margin-left: 30px;
   width: 280px;
   height: 100vh;
   float: left;
@@ -174,7 +174,7 @@ button, input[type=text], select {
 
 .content {
   margin-top: 50px;
-  width: 950px;
+  width: 930px;
   min-height: 550px;
   float: right;
   /*background: red;*/

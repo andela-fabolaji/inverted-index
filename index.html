@@ -29,11 +29,12 @@
         </div>
         <div class="search-holder">
             <div class="search-box">
-                <input type="text" name="query" ng-model="searchQuery"/>
+                <input type="text" name="query" ng-model="searchTerm"/>
             </div>
             <div class="drop-down">
-                <select ng-model="searchFile" ng-options="key as key for (key, value) in uploadedFiles">
+                <select ng-model="searchFile">
                     <option value="">All</option>
+                    <option ng-model="searchFile" value="{{fileName}}" ng-repeat="(fileName, content) in indexedFiles">{{fileName}}</option>
                 </select>
             </div>
             <div class="button"><button type="button" ng-click="searchIndex()"><i class="fa fa-search" aria-hidden="true"></i></button></div>
@@ -78,13 +79,14 @@
         <div class="upload-area">
             <div class="upload-div">
                 <label for="upload" class="upload">
-                <i class="fa fa-plus fa-2x"></i>&nbsp;<span>Upload File</span>
+                <i class="fa fa-plus-square-o fa-2x"></i>&nbsp;<span>Upload File</span>
                 <input type="file" multiple id="upload" name="upload">
                 </label>
             </div>
             <div class="drop-down-div">
-                <select ng-model="selectedFile" ng-options="key as key for (key, value) in uploadedFiles">
+                <select ng-model="selectedFile">
                     <option value="">-- Select File --</option>
+                    <option ng-model="selectedFile" ng-repeat="(fileName, content) in uploadedFiles" value="{{fileName}}">{{fileName}}</option>
                 </select>
             </div>
             <div class="button">
@@ -94,23 +96,23 @@
 
         <!-- table -->
         <div class="table-display" ng-if="showIndex">
-            <span ng-if="showIndex">Showing index for {{indexedFile}}</span>
-            <span ng-if="showResult">Showing result for {{indexedFile}}</span>
+            <span ng-if="showIndex">Showing index for {{indexedFiles[selectedFile].name}}</span>
+            <span ng-if="showResult">Showing result for {{indexedFile[selectedFile].name}}</span>
 
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
                         <th>Token</th>
-                        <th ng-repeat="key in docsLength" style="text-align: center;">
-                            Document {{key + 1}}
+                        <th ng-repeat="num in indexedFiles[selectedFile].docNum" style="text-align: center;">
+                            Document {{num + 1}}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="keys in indexKeys">
-                        <td>{{keys}}</td>
-                        <td ng-repeat="i in docsLength" style="text-align: center;">
-                            <span ng-if="result[keys].includes(i)"><i class="fa fa-check"></i></span>
+                    <tr ng-repeat="(token, value) in indexedFiles[selectedFile].indeces">
+                        <td>{{token}}</td>
+                        <td ng-repeat="i in indexedFiles[selectedFile].docNum" style="text-align: center;">
+                            <span ng-if="value.includes(i)"><i class="fa fa-check"></i></span>
                         </td>
                     </tr>
                 </tbody>
