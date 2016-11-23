@@ -6,6 +6,7 @@ app.controller('MainController', ['$scope', ($scope) => {
   $scope.indexObj = new InvertedIndex();
   $scope.uploadedFiles = {};
   $scope.indexedFiles = {};
+  $scope.searchedFiles = {}
   $scope.showIndex = false;
   $scope.showResult = false;
 
@@ -18,13 +19,12 @@ app.controller('MainController', ['$scope', ($scope) => {
 
     if ($scope.indexObj.createIndex(selectedFile, $scope.uploadedFiles[selectedFile])) {
       $scope.showIndex = true;
+      $scope.showResult = false;
 
-      // object to hold details about indexed file
       $scope.indexedFiles[selectedFile] = {
         name: selectedFile,
         indeces: $scope.indexObj.getIndex(selectedFile),
-        docNum: $scope.indexObj.getDocCount(selectedFile),
-        isIndexed: true
+        docNum: $scope.indexObj.getDocCount(selectedFile)
       }
     } else {
       alert('Invalid File type');
@@ -32,13 +32,25 @@ app.controller('MainController', ['$scope', ($scope) => {
   };
 
   $scope.searchIndex = () => {
-    let file = $scope.searchFile || null;
-    let searchTerm = $scope.searchTerm;
+    let file = $scope.searchFile || null,
+      searchTerm = $scope.searchTerm;
 
-    console.log(`Search for ${searchTerm} in ${file}`);
     if (!searchTerm) {
-      alert('I can\'t  search for nothing! Please type in your search term')
+      alert('I can\'t  search for nothing! Please type in your search term');
+      return false;
+    } else {
+      $scope.result = $scope.indexObj.searchIndex(file, searchTerm);
     }
+
+    for (let eachResult in $scope.result) {
+      $scope.searchedFiles[eachResult] = {
+        name: eachResult,
+        indeces: $scope.result[eachResult],
+        docNum: $scope.indexObj.getDocCount(eachResult)
+      }
+    }
+    $scope.showIndex = false;
+    $scope.showResult = true;
 
   };
 
@@ -62,8 +74,6 @@ app.controller('MainController', ['$scope', ($scope) => {
       }
 
       $scope.uploadedFiles[file.name] = fileContent;
-      // console.log()$scope.uploadedFiles[file.name];
-      // console.log(file.name);
       $scope.$apply();
     };
 

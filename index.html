@@ -29,7 +29,7 @@
         </div>
         <div class="search-holder">
             <div class="search-box">
-                <input type="text" name="query" ng-model="searchTerm"/>
+                <input type="text" name="query" ng-model="searchTerm" required/>
             </div>
             <div class="drop-down">
                 <select ng-model="searchFile">
@@ -41,14 +41,6 @@
         </div>
     </div>
     <div class="intro">
-
-    <!--
-    <div class="alert alert-danger alert-dismissable fade in msg-box">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
-    </div>
-    -->
-
         <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
     </div>
     <!-- endheader -->
@@ -97,8 +89,6 @@
         <!-- table -->
         <div class="table-display" ng-if="showIndex">
             <span ng-if="showIndex">Showing index for {{indexedFiles[selectedFile].name}}</span>
-            <span ng-if="showResult">Showing result for {{indexedFile[selectedFile].name}}</span>
-
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
@@ -119,6 +109,31 @@
             </table>
         </div>
         <!-- endtable -->
+
+        <!-- table -->
+        <div class="table-display" ng-if="showResult" ng-repeat="(key, value) in result">
+            <span>Showing search result for {{key}}</span>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Token</th>
+                        <th ng-repeat="num in searchedFiles[key]['docNum']" style="text-align: center;">
+                            Document {{num + 1}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(token, value) in searchedFiles[key]['indeces']">
+                        <td>{{token}}</td>
+                        <td ng-repeat="i in searchedFiles[key]['docNum']" style="text-align: center;">
+                            <span ng-if="value.includes(i)"><i class="fa fa-check"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- endtable -->
+
     </div>
     <!-- body -->
 

@@ -105,12 +105,6 @@ class InvertedIndex {
    */
 	_verifyFile(file) {
 
-    // try {
-    //   file = JSON.parse(file);
-    // } catch(exception) {
-    //   return false;
-    // }
-
     let flag = file;
 
     if (file.length > 0) {
