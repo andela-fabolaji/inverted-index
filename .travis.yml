@@ -10,7 +10,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 after_script:
-  - cat "./coverage/**/lcov.info" | ./node_modules/coveralls/bin/coveralls.js
+  - cat "./coverage/Chrome 54.0.2840 (Mac OS X 10.12.1)/lcov.info" | ./node_modules/coveralls/bin/coveralls.js
 
 
 
