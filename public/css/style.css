@@ -61,8 +61,6 @@ button, input[type=text], select {
   height: 50px;
 }
 
-.search-box {}
-
 .icon-font {
   color: #fff;
   font-size: 1.2em;
@@ -150,7 +148,7 @@ button, input[type=text], select {
   margin-top: 50px;
   margin-left: 30px;
   width: 280px;
-  height: 100vh;
+  height: 100%;
   float: left;
   border-right: 1px solid #e1e1e1;
 }
@@ -177,20 +175,17 @@ button, input[type=text], select {
   width: 930px;
   min-height: 550px;
   float: right;
-  /*background: red;*/
 }
 
 .upload-area {
   height: 50px;
   width: 100%;
   margin-bottom: 30px;
-  /*background: orange;*/
 }
 
 .upload-area > div {
   float: left;
   height: 50px;
-  /*background-color: #fff;*/
 }
 
 .upload-div {
@@ -240,7 +235,7 @@ label.upload:hover > i, label.upload:hover > span {
 /*------------------------------------------------------*/
 
 div.table-display {
-  min-height: 200px;
+  max-height: 400px;
   padding: 20px;
   width: 900px;
   background-color: #fff;
@@ -248,6 +243,7 @@ div.table-display {
   float: left;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
+  overflow-y: scroll;
 }
 
 .table-display > span {

@@ -3,3 +3,5 @@ public/lib
 coverage
 .vscode
 *.log
+.jshintrc
+.jshintignore

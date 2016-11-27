@@ -1,10 +1,12 @@
 'use strict';
 
 const gulp    = require('gulp'),
-      jshint  = require('gulp-jshint'),
+      eslint  = require('gulp-eslint'),
       jscs    = require('gulp-jscs'),
       connect = require('gulp-connect'),
-      run     = require('gulp-run');
+      run     = require('gulp-run'),
+      wiredep = require('wiredep').stream,
+      inject  = require('gulp-inject');
 
 const paths = {
   jsFiles: ['./src/inverted-index.js', './src/main.js'],
@@ -18,18 +20,13 @@ const paths = {
 // lint
 gulp.task('lint', () => {
   return gulp.src(paths.jsFiles)
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish', {
-          verbose: true
-    }))
-    .pipe(jscs());
-})
+    .pipe(eslint())
+    .pipe(eslint.formatEach())
+    .pipe(eslint.failAfterError());
+});
 
 // inject
 gulp.task('inject', () => {
-  const wiredep   = require('wiredep').stream,
-    inject        = require('gulp-inject');
-
   const injectSrc = gulp.src(
     [
       'public/css/*.css',
@@ -78,7 +75,7 @@ gulp.task('reloadServer', () => {
 
 //test
 gulp.task('test', () => {
-  return run('./node_modules/karma/bin/karma start karma.conf.js --single-run').exec();
+  return run('npm test').exec();
 });
 
 gulp.task('testWatch', () => {

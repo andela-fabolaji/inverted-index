@@ -6,15 +6,19 @@ app.controller('MainController', ['$scope', ($scope) => {
   $scope.indexObj = new InvertedIndex();
   $scope.uploadedFiles = {};
   $scope.indexedFiles = {};
-  $scope.searchedFiles = {}
+  $scope.searchedFiles = {};
   $scope.showIndex = false;
   $scope.showResult = false;
+  $scope.getCount = (num) => {
+    return new Array(num);
+  };
 
   $scope.createIndex = () => {
     let selectedFile = $scope.selectedFile;
 
     if (!selectedFile) {
-      alert('no file selected'); return;
+      displayMsg('Error! No file selected');
+      return false;
     }
 
     if ($scope.indexObj.createIndex(selectedFile, $scope.uploadedFiles[selectedFile])) {
@@ -24,10 +28,10 @@ app.controller('MainController', ['$scope', ($scope) => {
       $scope.indexedFiles[selectedFile] = {
         name: selectedFile,
         indeces: $scope.indexObj.getIndex(selectedFile),
-        docNum: $scope.indexObj.getDocCount(selectedFile)
+        docNum: $scope.indexObj.indexedFiles[selectedFile]
       }
     } else {
-      alert('Invalid File type');
+      displayMsg('Error! Invalid document format');
     }
   };
 
@@ -36,7 +40,7 @@ app.controller('MainController', ['$scope', ($scope) => {
       searchTerm = $scope.searchTerm;
 
     if (!searchTerm) {
-      alert('I can\'t  search for nothing! Please type in your search term');
+      displayMsg('I can\'t  search for nothing! Please type in your search term');
       return false;
     } else {
       $scope.result = $scope.indexObj.searchIndex(file, searchTerm);
@@ -46,7 +50,7 @@ app.controller('MainController', ['$scope', ($scope) => {
       $scope.searchedFiles[eachResult] = {
         name: eachResult,
         indeces: $scope.result[eachResult],
-        docNum: $scope.indexObj.getDocCount(eachResult)
+        docNum: $scope.indexObj.indexedFiles[eachResult]
       }
     }
     $scope.showIndex = false;
@@ -55,9 +59,10 @@ app.controller('MainController', ['$scope', ($scope) => {
   };
 
   $scope.verifyFileType = (file) => {
-    if (!file.name.toString().endsWith('.json')) {
-      alert('Error, it should be a json file');
-      return;
+    let exp = /\.json/;
+    if (!exp.test(file.name.toString())) {
+      displayMsg('Error! Only JSON files can be uploaded');
+      return false;
     }
 
     const reader = new FileReader();
@@ -70,7 +75,8 @@ app.controller('MainController', ['$scope', ($scope) => {
       try {
         fileContent = JSON.parse(fileContent);
       } catch(e) {
-        return 'invalid json file';
+        displayMsg('Error! Invalid document format');
+        return false;
       }
 
       $scope.uploadedFiles[file.name] = fileContent;
@@ -78,6 +84,12 @@ app.controller('MainController', ['$scope', ($scope) => {
     };
 
   };
+
+  function displayMsg (msg) {
+    $scope.message = msg;
+    $('.modal').modal();
+    $scope.$apply();
+  }
 
   let fileUpload = document.getElementById('upload');
 

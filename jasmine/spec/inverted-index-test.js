@@ -34,11 +34,12 @@ describe('Inverted Index class test suite', function () {
   // invalid files
   var file3 = [];
 
-  beforeEach(function () {
+  beforeEach(function (done) {
     invIndex = new InvertedIndex();
     invIndex.createIndex('file1', file1);
     invIndex.createIndex('file2', file2);
     invIndex.createIndex('file3', file3);
+    done();
   });
 
   /**
@@ -52,7 +53,7 @@ describe('Inverted Index class test suite', function () {
 
       it('Should not have any books indexed yet', function () {
         let newInvIndex = new InvertedIndex();
-        expect((Object.keys(newInvIndex.indeces)).length).toBeFalsy();
+        expect((Object.keys(newInvIndex.indices)).length).toBeFalsy();
       });
     });
   });
@@ -136,6 +137,15 @@ describe('Inverted Index class test suite', function () {
 
       it('Should return documents containing the words if a file is specified', function () {
         result = invIndex.searchIndex('file1', 'AliCe falls unusual Dwarf');
+        expect(result).toEqual(
+          {
+            file1: { alice: [ 0 ], falls: [ 0 ], unusual: [ 1 ], dwarf: [ 1 ] }
+          }
+        );
+      });
+
+      it('Should accept an array as a search parameter and return documents containing the words if a file is specified', function () {
+        result = invIndex.searchIndex('file1', ['AliCe falls unusual Dwarf']);
         expect(result).toEqual(
           {
             file1: { alice: [ 0 ], falls: [ 0 ], unusual: [ 1 ], dwarf: [ 1 ] }

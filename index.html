@@ -21,6 +21,22 @@
     <!-- endinject -->
 </head>
 <body ng-controller="MainController">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Message</h4>
+      </div>
+      <div class="modal-body">
+        {{message}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- header -->
     <div class="header container-fluid">
@@ -93,16 +109,16 @@
                 <thead>
                     <tr>
                         <th>Token</th>
-                        <th ng-repeat="num in indexedFiles[selectedFile].docNum" style="text-align: center;">
-                            Document {{num + 1}}
+                        <th ng-repeat="num in getCount(indexedFiles[selectedFile].docNum) track by $index" style="text-align: center;">
+                            Document {{$index + 1}}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="(token, value) in indexedFiles[selectedFile].indeces">
                         <td>{{token}}</td>
-                        <td ng-repeat="i in indexedFiles[selectedFile].docNum" style="text-align: center;">
-                            <span ng-if="value.includes(i)"><i class="fa fa-check"></i></span>
+                        <td ng-repeat="i in getCount(indexedFiles[selectedFile].docNum) track by $index" style="text-align: center;">
+                            <span ng-if="value.includes($index)"><i class="fa fa-check"></i></span>
                         </td>
                     </tr>
                 </tbody>
@@ -117,16 +133,16 @@
                 <thead>
                     <tr>
                         <th>Token</th>
-                        <th ng-repeat="num in searchedFiles[key]['docNum']" style="text-align: center;">
-                            Document {{num + 1}}
+                        <th ng-repeat="num in getCount(searchedFiles[key]['docNum']) track by $index" style="text-align: center;">
+                            Document {{$index + 1}}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="(token, value) in searchedFiles[key]['indeces']">
                         <td>{{token}}</td>
-                        <td ng-repeat="i in searchedFiles[key]['docNum']" style="text-align: center;">
-                            <span ng-if="value.includes(i)"><i class="fa fa-check"></i></span>
+                        <td ng-repeat="i in getCount(searchedFiles[key]['docNum']) track by $index" style="text-align: center;">
+                            <span ng-if="value.includes($index)"><i class="fa fa-check"></i></span>
                         </td>
                     </tr>
                 </tbody>
