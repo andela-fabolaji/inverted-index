@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
 describe('Inverted Index class test suite', function () {
 
   var invIndex;
 
-  // valid files
+  // Valid files
   var file1 = [
     {
       "title": "Alice in Wonderland",
@@ -31,19 +31,18 @@ describe('Inverted Index class test suite', function () {
     }
   ];
 
-  // invalid files
+  // Invalid files
   var file3 = [];
 
-  beforeEach(function (done) {
+  beforeEach(function () {
     invIndex = new InvertedIndex();
     invIndex.createIndex('file1', file1);
     invIndex.createIndex('file2', file2);
     invIndex.createIndex('file3', file3);
-    done();
   });
 
   /**
-   * inverted index object test suite
+   * Inverted index object test suite
    */
   describe('Inverted Index Instance', function () {
     describe('When an invertedIndex object is instantiated', function () {
@@ -97,6 +96,48 @@ describe('Inverted Index class test suite', function () {
       it('Should not override an existing index when another file is indexed', function () {
         expect(Object.keys(invIndex.getIndex()).length).toBe(2);
       });
+    });
+  });
+
+  /**
+   * Search index test suite
+   */
+  describe('Get index', function () {
+    it('Should return the correct index of any document passed to it', function () {
+      let result = invIndex.getIndex('file1');
+      expect(result).toEqual(
+        { alice: [ 0 ],
+          in: [ 0 ],
+          wonderland: [ 0 ],
+          falls: [ 0 ],
+          into: [ 0 ],
+          a: [ 0, 1 ],
+          rabbit: [ 0 ],
+          hole: [ 0 ],
+          and: [ 0, 1 ],
+          enters: [ 0 ],
+          world: [ 0 ],
+          full: [ 0 ],
+          of: [ 0, 1 ],
+          imagination: [ 0 ],
+          the: [ 1 ],
+          lord: [ 1 ],
+          rings: [ 1 ],
+          fellowship: [ 1 ],
+          ring: [ 1 ],
+          an: [ 1 ],
+          unusual: [ 1 ],
+          alliance: [ 1 ],
+          man: [ 1 ],
+          elf: [ 1 ],
+          dwarf: [ 1 ],
+          wizard: [ 1 ],
+          hobbit: [ 1 ],
+          seek: [ 1 ],
+          to: [ 1 ],
+          destroy: [ 1 ],
+          powerful: [ 1 ] }
+      );
     });
   });
 
@@ -158,8 +199,5 @@ describe('Inverted Index class test suite', function () {
         expect(result).toEqual({ file1: {} });
       });
     });
-
   });
-
-
 });

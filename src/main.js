@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const app = angular.module("InvertedIndex", []);
 
@@ -12,19 +12,16 @@ app.controller('MainController', ['$scope', ($scope) => {
   $scope.getCount = (num) => {
     return new Array(num);
   };
-
+  // Create index
   $scope.createIndex = () => {
     let selectedFile = $scope.selectedFile;
-
     if (!selectedFile) {
       displayMsg('Error! No file selected');
       return false;
     }
-
     if ($scope.indexObj.createIndex(selectedFile, $scope.uploadedFiles[selectedFile])) {
       $scope.showIndex = true;
       $scope.showResult = false;
-
       $scope.indexedFiles[selectedFile] = {
         name: selectedFile,
         indeces: $scope.indexObj.getIndex(selectedFile),
@@ -35,10 +32,10 @@ app.controller('MainController', ['$scope', ($scope) => {
     }
   };
 
+  // Search Index
   $scope.searchIndex = () => {
     let file = $scope.searchFile || null,
       searchTerm = $scope.searchTerm;
-
     if (!searchTerm) {
       displayMsg('I can\'t  search for nothing! Please type in your search term');
       return false;
@@ -57,32 +54,26 @@ app.controller('MainController', ['$scope', ($scope) => {
     $scope.showResult = true;
 
   };
-
   $scope.verifyFileType = (file) => {
     let exp = /\.json/;
     if (!exp.test(file.name.toString())) {
       displayMsg('Error! Only JSON files can be uploaded');
       return false;
     }
-
     const reader = new FileReader();
     let fileContent;
-
     reader.readAsText(file);
     reader.onload =  (loadEvent) => {
       let fileContent = loadEvent.target.result;
-
       try {
         fileContent = JSON.parse(fileContent);
       } catch(e) {
         displayMsg('Error! Invalid document format');
         return false;
       }
-
       $scope.uploadedFiles[file.name] = fileContent;
       $scope.$apply();
     };
-
   };
 
   function displayMsg (msg) {

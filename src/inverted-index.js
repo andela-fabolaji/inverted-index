@@ -28,8 +28,8 @@ class InvertedIndex {
     file = this._verifyFile(file);
     if (!file) { return false; }
 
-    const words = []
-        , indexedWords = {};
+    const words = [],
+          indexedWords = {};
 
     file.forEach((document) => {
       words.push(this._tokenize(this._stringify(document)));
@@ -86,7 +86,7 @@ class InvertedIndex {
 
     termsArr = this._tokenize(searchTerm);
 
-    if (!fileName || fileName === null) {
+    if (!fileName) {
       for (let eachFile in this.indices) {
         result[eachFile] = this._fetchResult(termsArr, this.indices[eachFile]);
       }
@@ -118,7 +118,7 @@ class InvertedIndex {
     } else flag = false;
 
     return flag;
-	}
+  }
 
   /**
    * _fetchResult private method takes the array of terms
