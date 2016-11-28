@@ -25,14 +25,14 @@ class InvertedIndex {
    */
   createIndex(fileName, file) {
 
-    file = this._verifyFile(file);
+    file = this.verifyFile(file);
     if (!file) { return false; }
 
     const words = [],
           indexedWords = {};
 
     file.forEach((document) => {
-      words.push(this._tokenize(this._stringify(document)));
+      words.push(this.tokenize(this.stringify(document)));
     });
 
     words.forEach((documentWords, index) => {
@@ -84,26 +84,26 @@ class InvertedIndex {
       searchTerm = searchTerm.join(',').split(',').join(' ');
     }
 
-    termsArr = this._tokenize(searchTerm);
+    termsArr = this.tokenize(searchTerm);
 
     if (!fileName) {
       for (let eachFile in this.indices) {
-        result[eachFile] = this._fetchResult(termsArr, this.indices[eachFile]);
+        result[eachFile] = this.fetchResult(termsArr, this.indices[eachFile]);
       }
     } else {
       let fileDoc = this.indices[fileName];
-      result[fileName] = this._fetchResult(termsArr, fileDoc);
+      result[fileName] = this.fetchResult(termsArr, fileDoc);
     }
     return result;
   }
 
   /**
-   * _verifyFile private method checks for validity of json file
+   * verifyFile private method checks for validity of json file
    *
    * @param {Array} file
    * @return {Bool} || {Array} flag
    */
-  _verifyFile(file) {
+  verifyFile(file) {
 
     let flag = file;
 
@@ -121,14 +121,14 @@ class InvertedIndex {
   }
 
   /**
-   * _fetchResult private method takes the array of terms
+   * fetchResult private method takes the array of terms
    * and uses each token to fetch it's result
    *
    * @param {Array} termsArr
    * @param {Object} file
    * @return {Object} result
    */
-  _fetchResult(termsArr, file) {
+  fetchResult(termsArr, file) {
     let result = {};
     termsArr.forEach((eachTerm, index) => {
       if (file.hasOwnProperty(eachTerm)) {
@@ -139,37 +139,37 @@ class InvertedIndex {
   }
 
   /**
-   * _stringify private method merges the title and
+   * stringify private method merges the title and
    * text of each document into a single string
    *
    * @param {String} document
    * @return {String} stringified
    */
-  _stringify(document) {
+  stringify(document) {
     return document.title + " " + document.text;
   }
 
   /**
-   * _tokenize private method prepares a clean text and
+   * tokenize private method prepares a clean text and
    * converts it into an array of words
    *
    * @param {String} documentText
    * @return {Array} tokenArray
    */
-  _tokenize(documentText) {
+  tokenize(documentText) {
     let tokenArray = [];
     tokenArray = documentText.replace(/[^a-z0-9\s]+/ig, '').trim().toLowerCase().split(/\s+/);
-    return this._makeUnique(tokenArray);
+    return this.makeUnique(tokenArray);
   }
 
   /**
-   * _makeUnique private method converts
+   * makeUnique private method converts
    * an array in a unique array
    *
    * @param {Array} tokenArray
    * @return {Array} uniqueArray
    */
-  _makeUnique(tokenArray) {
+  makeUnique(tokenArray) {
     return tokenArray.filter((value, index, self) => {
       return self.indexOf(value) === index;
     });

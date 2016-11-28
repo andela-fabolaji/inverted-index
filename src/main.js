@@ -28,7 +28,7 @@ app.controller('MainController', ['$scope', ($scope) => {
         docNum: $scope.indexObj.indexedFiles[selectedFile]
       }
     } else {
-      displayMsg('Error! Invalid document format');
+      displayMsg(`Error! ${selectedFile} is not properly formatted`);
     }
   };
 
@@ -37,7 +37,7 @@ app.controller('MainController', ['$scope', ($scope) => {
     let file = $scope.searchFile || null,
       searchTerm = $scope.searchTerm;
     if (!searchTerm) {
-      displayMsg('I can\'t  search for nothing! Please type in your search term');
+      displayMsg('Error! Please type in your search term');
       return false;
     } else {
       $scope.result = $scope.indexObj.searchIndex(file, searchTerm);
@@ -57,7 +57,7 @@ app.controller('MainController', ['$scope', ($scope) => {
   $scope.verifyFileType = (file) => {
     let exp = /\.json/;
     if (!exp.test(file.name.toString())) {
-      displayMsg('Error! Only JSON files can be uploaded');
+      displayMsg('Error! {$file.name} is not a json file');
       return false;
     }
     const reader = new FileReader();
@@ -68,7 +68,7 @@ app.controller('MainController', ['$scope', ($scope) => {
       try {
         fileContent = JSON.parse(fileContent);
       } catch(e) {
-        displayMsg('Error! Invalid document format');
+        displayMsg(`Error! ${file.name} is not properly formatted`);
         return false;
       }
       $scope.uploadedFiles[file.name] = fileContent;
