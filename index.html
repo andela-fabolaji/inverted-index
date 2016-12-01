@@ -22,139 +22,154 @@
 </head>
 <body ng-controller="MainController">
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Message</h4>
-      </div>
-      <div class="modal-body">
-        {{message}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Message</h4>
+          </div>
+          <div class="modal-body">
+            {{message}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
     <!-- header -->
-    <div class="header container-fluid">
-        <div class="brand">
-            <span>Inverted App</span>
+    <div class="container-fluid header">
+      <div class="row">
+        <div class="col-sm-12 col-md-3 logo">Inverted App</div>
+        <div class="col-sm-12 col-md-9 search-area">
+          <div class="search-holder">
+              <div class="search-box">
+                  <input type="text" name="query" ng-model="searchTerm" required/>
+              </div>
+              <div class="drop-down">
+                  <select ng-model="searchFile">
+                      <option value="">-- All --</option>
+                      <option ng-model="searchFile" value="{{fileName}}" ng-repeat="(fileName, content) in indexedFiles">{{fileName}}</option>
+                  </select>
+              </div>
+              <div class="button"><button type="button" ng-click="searchIndex()"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </div>
+          </div>
         </div>
-        <div class="search-holder">
-            <div class="search-box">
-                <input type="text" name="query" ng-model="searchTerm" required/>
-            </div>
-            <div class="drop-down">
-                <select ng-model="searchFile">
-                    <option value="">All</option>
-                    <option ng-model="searchFile" value="{{fileName}}" ng-repeat="(fileName, content) in indexedFiles">{{fileName}}</option>
-                </select>
-            </div>
-            <div class="button"><button type="button" ng-click="searchIndex()"><i class="fa fa-search" aria-hidden="true"></i></button></div>
-        </div>
-    </div>
-    <div class="intro">
-        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+      </div>
+      <div class="row slogan">
+        Index it. Find it!
+      </div>
     </div>
     <!-- endheader -->
 
     <!-- body -->
-    <div class="left-pane">
-        <h3>About this App</h3>
-        <span class="about">
-            Inverted index is designed to allow very fast full-text searches. An inverted index consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears.
-        </span>
-        <h4>Usage</h4>
-        <p>
-            Uploads
-            <ul>
-                <li>Upload JSON file</li>
-                <li>Click Create Index</li>
-            </ul>
-        </p>
-        <p>
-            Search
-            <ul>
-                <li>Enter search term(s)</li>
-                <li>Click search</li>
-            </ul>
-        </p>
-    </div>
-    <div class="content">
-        <div class="upload-area">
-            <div class="upload-div">
-                <label for="upload" class="upload">
+    <div class="container-fluid content-shell">
+      <div class="row">
+        <!-- left pane -->
+        <div class="col-sm-12 col-md-3 left-pane">
+          <div class="title">About this app</div>
+          <div class="about">
+            <span>
+              Inverted index is designed to allow very fast full-text searches. An inverted index consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears.
+            </span>
+          </div>
+          <div class="how-to">
+            <h4>Usage</h4>
+            <p>
+                Uploads
+                <ul>
+                    <li>Upload JSON file</li>
+                    <li>Click Create Index</li>
+                </ul>
+            </p>
+            <p>
+                Search
+                <ul>
+                    <li>Enter search term(s)</li>
+                    <li>Click search</li>
+                </ul>
+            </p>
+          </div>
+        </div>
+
+        <!-- right pane -->
+        <div class="col-sm-12 col-md-9 right-pane">
+
+          <!-- Upload area -->
+          <div class="upload-area">
+            <div class="upload-btn">
+              <label for="upload" class="upload">
                 <i class="fa fa-plus-square-o fa-2x"></i>&nbsp;<span>Upload File</span>
                 <input type="file" multiple id="upload" name="upload">
-                </label>
+              </label>
             </div>
             <div class="drop-down-div">
-                <select ng-model="selectedFile">
-                    <option value="">-- Select File --</option>
-                    <option ng-model="selectedFile" ng-repeat="(fileName, content) in uploadedFiles" value="{{fileName}}">{{fileName}}</option>
-                </select>
+              <select ng-model="selectedFile">
+                <option value="">-- Select File --</option>
+                  <option ng-model="selectedFile" ng-repeat="(fileName, content) in uploadedFiles" value="{{fileName}}">{{fileName}}
+                  </option>
+              </select>
             </div>
             <div class="button">
-                <button type="button" ng-click="createIndex()">Create Index</button>
+              <button type="button" ng-click="createIndex()">Create Index</button>
             </div>
-        </div>
+          </div>
 
-        <!-- table -->
-        <div class="table-display" ng-if="showIndex">
+          <!-- table 1  area -->
+          <div class="table-display table table-responsive" ng-if="showIndex">
             <span ng-if="showIndex">Showing index for {{indexedFiles[selectedFile].name}}</span>
             <table class="table table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th>Token</th>
-                        <th ng-repeat="num in getCount(indexedFiles[selectedFile].docNum) track by $index" style="text-align: center;">
-                            Document {{$index + 1}}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="(token, value) in indexedFiles[selectedFile].indeces">
-                        <td>{{token}}</td>
-                        <td ng-repeat="i in getCount(indexedFiles[selectedFile].docNum) track by $index" style="text-align: center;">
-                            <span ng-if="value.includes($index)"><i class="fa fa-check"></i></span>
-                        </td>
-                    </tr>
-                </tbody>
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th ng-repeat="num in getCount(indexedFiles[selectedFile].docNum) track by $index" style="text-align: center;">
+                    Doc {{$index + 1}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(token, value) in indexedFiles[selectedFile].indeces">
+                  <td>{{token}}</td>
+                  <td ng-repeat="i in getCount(indexedFiles[selectedFile].docNum) track by $index" style="text-align: center;">
+                    <span ng-if="value.includes($index)"><i class="fa fa-check"></i></span>
+                  </td>
+                </tr>
+              </tbody>
             </table>
-        </div>
-        <!-- endtable -->
+          </div>
 
-        <!-- table -->
-        <div class="table-display" ng-if="showResult" ng-repeat="(key, value) in result">
+          <!-- table 2 area -->
+          <div class="table-display" ng-if="showResult" ng-repeat="(key, value) in result">
             <span>Showing search result for {{key}}</span>
             <table class="table table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th>Token</th>
-                        <th ng-repeat="num in getCount(searchedFiles[key]['docNum']) track by $index" style="text-align: center;">
-                            Document {{$index + 1}}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="(token, value) in searchedFiles[key]['indeces']">
-                        <td>{{token}}</td>
-                        <td ng-repeat="i in getCount(searchedFiles[key]['docNum']) track by $index" style="text-align: center;">
-                            <span ng-if="value.includes($index)"><i class="fa fa-check"></i></span>
-                            <span ng-if="!value.includes($index)">
-                                <i class="fa fa-close"></i>
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th ng-repeat="num in getCount(searchedFiles[key]['docNum']) track by $index" style="text-align: center;">
+                    Document {{$index + 1}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(token, value) in searchedFiles[key]['indeces']">
+                  <td>{{token}}</td>
+                  <td ng-repeat="i in getCount(searchedFiles[key]['docNum']) track by $index" style="text-align: center;">
+                    <span ng-if="value.includes($index)"><i class="fa fa-check"></i></span>
+                    <span ng-if="!value.includes($index)">
+                    <i class="fa fa-close"></i>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
             </table>
+          </div>
         </div>
-        <!-- endtable -->
-
+      </div>
+    <!-- end row-->
     </div>
-    <!-- body -->
+    <!-- end content-shell -->
 
     <!--inject:js-->
     <script src="public/js/angular.min.js"></script>

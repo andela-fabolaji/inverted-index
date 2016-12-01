@@ -16,6 +16,7 @@ html {
 
 body {
   background: #ebeff1;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 div {
@@ -31,34 +32,27 @@ button, input[type=text], select {
 }
 
 .header {
-  height: 70px;
   width: 100%;
   background-color: #2556b6;
-  padding-top: 10px;
 }
 
-.brand {
-  position: absolute;
-  left: 20px;
-  padding-top: 10px;
-}
-
-.brand > span {
-  font-size: 1.5em;
+div.logo {
+  height: 50px;
+  background-color: #1c4aa3;
+  text-align: center;
   color: #fff;
-  display: block;
+  line-height: 50px;
+}
+
+div.search-area {
+  height: 50px;
+  padding-top: 5px;
 }
 
 .search-holder {
-  width: 700px;
-  height: 50px;
+  height: 40px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 5px;
-}
-
-.search-holder > div {
-  float: left;
-  height: 50px;
 }
 
 .icon-font {
@@ -67,32 +61,33 @@ button, input[type=text], select {
 }
 
 .search-box > input[type=text] {
-  width: 450px;
-  height: 50px;
+  width: 60%;
+  height: 40px;
   outline: none;
   border: none;
   background-color: #fff;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  padding-left: 50px;
-  transition: ease-in 0.3s all;
+  padding-left: 5%;
+  float: left;
 }
 
 .search-box > input[type=text]:focus {
   background-color: rgba(255, 255, 255, 1);
   color: #000;
-  font-size: 1.7em;
 }
 
 .drop-down {
-  width:150px;
-  padding-top: 10px;
+  width:20%;
   background: #fff;
+  float: left;
+  padding-top: 5px;
+  height: 40px;
 }
 
 .drop-down > select {
   height: 30px;
-  width: 150px;
+  width: 100%;
   border-radius: 0;
   padding-left: 10px;
   background-color: #fff;
@@ -100,36 +95,33 @@ button, input[type=text], select {
   border-left: 1px solid #c6c6c6;
 }
 
-.button {
-  width: 100px;
+.search-holder .button {
+  width: 20%;
+  float: left;
 }
 
-.button > button {
+.search-holder .button > button {
   width: 100%;
-  height: 50px;
+  height: 40px;
   background-color: #194297;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: #fff;
 }
 
-.button > button:hover {
+.search-holder .button > button:hover {
   background-color: #10388a;
 }
 
-.intro {
-  height: 50px;
-  width: 100%;
+.slogan {
+  height: 30px;
   background: #fff;
   text-align: center;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.08);
-  padding-top: 15px;
+  line-height: 30px;
   box-sizing: border-box;
-}
-
-.intro > span {
-  font-size: 1.0em;
-  display: block;
+  font-size: .9em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .msg-box {
@@ -144,57 +136,59 @@ button, input[type=text], select {
 /* main body */
 /*------------------------------------------------------*/
 
+.content-shell {
+  padding-top: 10px;
+}
+
 .left-pane {
-  margin-top: 50px;
-  margin-left: 30px;
-  width: 280px;
-  height: 100%;
-  float: left;
-  border-right: 1px solid #e1e1e1;
+  width: 95%;
+  display: none;
 }
 
-.left-pane p ~ul { padding-left: 20px;}
-.left-pane > h3, h4 { margin-bottom: 20px;}
+.left-pane .title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 
-.left-pane > span.about {
+.left-pane .about span {
   display: block;
-  width: 250px;
-  float: left;
-  font-size: 0.9em;
-  text-align: left;
-  line-height: 1.6em;
-  border-top: 1px solid #e1e1e1;
+  font-size: .8rem;
+  color: #313131;
+  line-height: 20px;
+  padding: 15px 0;
   border-bottom: 1px solid #e1e1e1;
-  padding-top: 20px;
-  padding-bottom: 30px;
-  margin-bottom: 20px;
 }
 
-.content {
-  margin-top: 50px;
-  width: 930px;
+.left-pane .how-to {
+  padding: 10px 0;
+}
+
+.left-pane p ~ul {
+  padding-left: 30px;
+}
+
+.right-pane {
+  width: 100%;
   min-height: 550px;
-  float: right;
+  padding-top: 20px;
 }
 
 .upload-area {
   height: 50px;
-  width: 100%;
+  width: 95%;
   margin-bottom: 30px;
 }
 
-.upload-area > div {
-  float: left;
+.upload-btn {
   height: 50px;
-}
-
-.upload-div {
-  width: 150px;
+  width: 30%;
   padding-top: 10px;
+  float: left;
 }
 
 input[type=file] {
   display: none;
+  float: left;
 }
 
 
@@ -217,17 +211,37 @@ label.upload:hover > i, label.upload:hover > span {
 
 
 .drop-down-div {
-  width:150px;
+  width:40%;
   background: #fff;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  float: left;
 }
 
 .drop-down-div > select {
   height: 50px;
-  width: 150px;
+  width: 100%;
   background-color: #fff;
   padding-left: 10px;
+}
+
+.upload-area .button {
+  float: left;
+  width: 30%;
+}
+
+.upload-area .button button {
+  height: 50px;
+  width: 100%;
+  background-color: #194297;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #fff;
+}
+
+.upload-area .button button:hover {
+  cursor: pointer;
+  background-color: #10388a;
 }
 
 /*------------------------------------------------------*/
@@ -235,15 +249,15 @@ label.upload:hover > i, label.upload:hover > span {
 /*------------------------------------------------------*/
 
 div.table-display {
-  max-height: 400px;
-  padding: 20px;
-  width: 900px;
+  max-height: 300px;
+  padding: 10px;
+  width: 95%;
   background-color: #fff;
   border-radius: 5px;
-  float: left;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
   overflow-y: scroll;
+  font-size: .7rem;
 }
 
 .table-display > span {
@@ -253,6 +267,256 @@ div.table-display {
   margin-bottom: 20px;
 }
 
+table tbody tr td { width: 30px; height: 30px }
+
 table tbody tr td > span > i { color: #008000;}
 table tbody tr td > span > i.fa-close { color: #ff0000;}
 
+
+@media only screen and (min-width: 768px) {
+
+  div.logo {
+    height: 70px;
+    background-color: #1c4aa3;
+    text-align: center;
+    color: #fff;
+    line-height: 70px;
+  }
+
+  div.search-area {
+    height: 70px;
+    padding-top: 10px;
+  }
+
+  .search-holder {
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+
+  .icon-font {
+    color: #fff;
+    font-size: 1.2em;
+  }
+
+  .search-box > input[type=text] {
+    width: 60%;
+    height: 50px;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-left: 5%;
+    float: left;
+  }
+
+  .search-box > input[type=text]:focus {
+    background-color: rgba(255, 255, 255, 1);
+    color: #000;
+  }
+
+  .drop-down {
+    width:20%;
+    background: #fff;
+    float: left;
+    padding-top: 5px;
+    height: 50px;
+  }
+
+  .drop-down > select {
+    height: 40px;
+    width: 100%;
+    border-radius: 0;
+    padding-left: 10px;
+    background-color: #fff;
+    transition: ease-in 0.3s all;
+    border-left: 1px solid #c6c6c6;
+  }
+
+  .search-holder .button {
+    width: 20%;
+    float: left;
+  }
+
+  .search-holder .button > button {
+    height: 50px;
+    background-color: #194297;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+  }
+
+  .search-holder .button > button:hover {
+    background-color: #10388a;
+  }
+
+  .slogan {
+    height: 50px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.08);
+    line-height: 50px;
+    box-sizing: border-box;
+    font-size: .9em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .msg-box {
+    position: absolute;
+    z-index: 999;
+    left: 0; right: 0;
+    width: 50% !important;
+    top: 90px;
+  }
+
+  /*------------------------------------------------------*/
+  /* main body */
+  /*------------------------------------------------------*/
+
+  .content-shell {
+    padding-top: 20px;
+    /*height: 100%;*/
+  }
+
+  .left-pane {
+    width: 25%;
+    height: 75vh;
+    float: left;
+    border-right: 1px solid #e1e1e1;
+    display: block;
+  }
+
+  .left-pane .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .left-pane .about span {
+    display: block;
+    font-size: .8rem;
+    color: #313131;
+    line-height: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .left-pane .how-to {
+    padding: 10px 0;
+  }
+
+  .left-pane p ~ul {
+    padding-left: 30px;
+  }
+
+  .right-pane {
+    width: 75%;
+    padding: 20px 30px;
+    float: left;
+  }
+
+  .upload-area {
+    height: 50px;
+    width: 50%;
+    margin-bottom: 30px;
+    /*background: red;*/
+    float: left;
+  }
+
+  .upload-btn {
+    height: 50px;
+    width: 30%;
+    padding-top: 10px;
+    float: left;
+  }
+
+  input[type=file] {
+    display: none;
+    float: left;
+  }
+
+
+  label.upload > i ~span{
+    font-weight: lighter;
+  }
+
+  label.upload:hover {
+    cursor: pointer;
+  }
+
+  label.upload > i, label.upload > span {
+    color: #313131;
+    font-size: 0.9em;
+  }
+
+  label.upload:hover > i, label.upload:hover > span {
+    color: #2856b6;
+  }
+
+
+  .drop-down-div {
+    width:40%;
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    float: left;
+  }
+
+  .drop-down-div > select {
+    height: 50px;
+    width: 100%;
+    background-color: #fff;
+    padding-left: 10px;
+  }
+
+  .upload-area .button {
+    float: left;
+    width: 30%;
+  }
+
+  .upload-area .button button {
+    height: 50px;
+    width: 100%;
+    background-color: #194297;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+  }
+
+  .upload-area .button button:hover {
+    cursor: pointer;
+    background-color: #10388a;
+  }
+
+  /*------------------------------------------------------*/
+  /* table */
+  /*------------------------------------------------------*/
+
+  div.table-display {
+    max-height: 400px;
+    padding: 10px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    font-size: .9rem;
+  }
+
+  .table-display > span {
+    display: block;
+    font-size: 1.3em;
+    color: #757575;
+    margin-bottom: 20px;
+  }
+
+  table tbody tr td { width: 30px; height: 30px }
+
+  table tbody tr td > span > i { color: #008000;}
+  table tbody tr td > span > i.fa-close { color: #ff0000;}
+
+
+
+
+}

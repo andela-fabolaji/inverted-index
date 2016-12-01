@@ -17,7 +17,6 @@ app.controller('MainController', ['$scope', ($scope) => {
     let selectedFile = $scope.selectedFile;
     if (!selectedFile) {
       displayMsg('Error! No file selected');
-      return false;
     }
     if ($scope.indexObj.createIndex(selectedFile, $scope.uploadedFiles[selectedFile])) {
       $scope.showIndex = true;
@@ -38,10 +37,8 @@ app.controller('MainController', ['$scope', ($scope) => {
       searchTerm = $scope.searchTerm;
     if (!searchTerm) {
       displayMsg('Error! Please type in your search term');
-      return false;
     } else if (Object.keys($scope.indexedFiles).length === 0) {
       displayMsg('No files indexed yet');
-      return false;
     } else {
       $scope.result = $scope.indexObj.searchIndex(file, searchTerm);
     }
@@ -61,7 +58,7 @@ app.controller('MainController', ['$scope', ($scope) => {
     const exp = /\.json/;
     if (!exp.test(file.name.toString())) {
       displayMsg(`Error! ${file.name} is not a json file`);
-      return false;
+      return 0;
     }
     const reader = new FileReader();
     let fileContent;
@@ -76,7 +73,6 @@ app.controller('MainController', ['$scope', ($scope) => {
   function displayMsg (msg) {
     $scope.message = msg;
     $('.modal').modal();
-    $scope.$apply();
   }
 
   let fileUpload = document.getElementById('upload');

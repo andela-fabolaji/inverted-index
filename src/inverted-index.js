@@ -1,4 +1,3 @@
-'use strict';
 /**
  * The Inverted Index class
  */
@@ -28,8 +27,8 @@ class InvertedIndex {
     file = this.verifyFile(file);
     if (!file) { return false; }
 
-    const words = [],
-          indexedWords = {};
+    const words = [];
+    const indexedWords = {};
 
     file.forEach((document) => {
       words.push(this.tokenize(this.stringify(document)));
@@ -64,7 +63,7 @@ class InvertedIndex {
     }
 
     return typeof fileName === 'undefined'
-        || typeof fileName !== 'string' ? this.indices : this.indices[fileName];
+      || typeof fileName !== 'string' ? this.indices : this.indices[fileName];
   }
 
   /**
@@ -77,8 +76,8 @@ class InvertedIndex {
    */
   searchIndex(fileName, searchTerm) {
 
-    let result = {}
-      , termsArr = [];
+    const result = {};
+    let termsArr = [];
 
     if (Array.isArray(searchTerm)) {
       searchTerm = searchTerm.join(',').split(',').join(' ');
@@ -140,7 +139,7 @@ class InvertedIndex {
       if (file.hasOwnProperty(eachTerm)) {
         result[termsArr[index]] = file[eachTerm];
       } else {
-        result[termsArr[index]] = null;
+        result[termsArr[index]] = [];
       }
     });
     return result;
