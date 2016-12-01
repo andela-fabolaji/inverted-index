@@ -143,6 +143,9 @@
                         <td>{{token}}</td>
                         <td ng-repeat="i in getCount(searchedFiles[key]['docNum']) track by $index" style="text-align: center;">
                             <span ng-if="value.includes($index)"><i class="fa fa-check"></i></span>
+                            <span ng-if="!value.includes($index)">
+                                <i class="fa fa-close"></i>
+                            </span>
                         </td>
                     </tr>
                 </tbody>

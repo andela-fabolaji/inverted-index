@@ -105,6 +105,12 @@ class InvertedIndex {
    */
   verifyFile(file) {
 
+     try {
+        file = JSON.parse(file);
+      } catch(e) {
+        return false;
+      }
+
     let flag = file;
 
     if (file.length > 0) {
@@ -132,7 +138,9 @@ class InvertedIndex {
     let result = {};
     termsArr.forEach((eachTerm, index) => {
       if (file.hasOwnProperty(eachTerm)) {
-          result[termsArr[index]] = file[eachTerm];
+        result[termsArr[index]] = file[eachTerm];
+      } else {
+        result[termsArr[index]] = null;
       }
     });
     return result;

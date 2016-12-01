@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "gulp",
-    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run"
+    "test": "node_modules/karma/bin/karma start karma.conf.js --single-run",
+    "postinstall": "gulp install"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "wiredep": "^4.0.0"
   },
   "dependencies": {
+    "bower": "^1.8.0",
     "coveralls": "^2.11.15",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.0.0",

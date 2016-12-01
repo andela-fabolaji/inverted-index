@@ -254,4 +254,5 @@ div.table-display {
 }
 
 table tbody tr td > span > i { color: #008000;}
+table tbody tr td > span > i.fa-close { color: #ff0000;}
 
