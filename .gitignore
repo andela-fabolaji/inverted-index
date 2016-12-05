@@ -1,0 +1,8 @@
+node_modules
+public/lib
+coverage
+.vscode
+*.log
+.jshintrc
+.jshintignore
+feeback.md

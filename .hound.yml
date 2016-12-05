@@ -1,0 +1,6 @@
+jshint:
+  config_file: .eslintrc
+jshint:
+  ignore_file: .gitignore
+jshint:
+  enabled: true
