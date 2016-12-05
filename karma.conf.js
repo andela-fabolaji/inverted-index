@@ -1,22 +1,31 @@
+'use strict';
 // Karma configuration
-// Generated on Fri Nov 18 2016 13:04:18 GMT+0100 (WAT)
+// Generated on Sat Nov 19 2016 17:23:33 GMT+0100 (WAT)
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: "",
 
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ["jasmine"],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'src/inverted-index.js', 'jasmine/spec/inverted-index-test.js'
+      "src/inverted-index.js",
+      "jasmine/spec/inverted-index-test.js"
     ],
+
+    customLaunchers: {
+      Chrome_travis_ci: {
+      base: "Chrome",
+        flags: ["--no-sandbox"]
+      }
+    },
 
 
     // list of files to exclude
@@ -27,21 +36,19 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/inverted-index.js': ['coverage']
-    },
-
-
-    coverageReporter: {
-      type: 'lcov',
-      dir: 'coverage/'
+      "src/inverted-index.js": "coverage"
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ["progress", "coverage", "coveralls"],
 
+    coverageReporter: {
+      type: "lcov",
+      dir: "coverage/"
+    },
 
     // web server port
     port: 9876,
@@ -62,7 +69,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: process.env.TRAVIS ? ["Chrome_travis_ci"] : ["Chrome"],
 
 
     // Continuous Integration mode
@@ -71,13 +78,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity,
-
-    customLaunchers: {
-      Chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    }
-  })
-}
+    concurrency: Infinity
+  });
+};

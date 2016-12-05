@@ -1,10 +1,12 @@
 'use strict';
 
-const gulp    = require('gulp'),
-      jshint  = require('gulp-jshint'),
-      jscs    = require('gulp-jscs'),
-      connect = require('gulp-connect'),
-      run     = require('gulp-run');
+const gulp    = require('gulp');
+const eslint  = require('gulp-eslint');
+const connect = require('gulp-connect');
+const run     = require('gulp-run');
+const wiredep = require('wiredep').stream;
+const inject  = require('gulp-inject');
+const bower   = require('gulp-bower');
 
 const paths = {
   jsFiles: ['./src/inverted-index.js', './src/main.js'],
@@ -18,18 +20,13 @@ const paths = {
 // lint
 gulp.task('lint', () => {
   return gulp.src(paths.jsFiles)
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish', {
-          verbose: true
-    }))
-    .pipe(jscs());
-})
+    .pipe(eslint())
+    .pipe(eslint.formatEach())
+    .pipe(eslint.failAfterError());
+});
 
 // inject
 gulp.task('inject', () => {
-  const wiredep   = require('wiredep').stream,
-    inject        = require('gulp-inject');
-
   const injectSrc = gulp.src(
     [
       'public/css/*.css',
@@ -56,7 +53,7 @@ gulp.task('serve', () => {
   const options = {
     root: './',
     livereload: true,
-    port: process.env.port || 3000
+    port: process.env.PORT || 4000
   };
 
   connect.server(options);
@@ -78,7 +75,7 @@ gulp.task('reloadServer', () => {
 
 //test
 gulp.task('test', () => {
-  return run('./node_modules/karma/bin/karma start karma.conf.js --single-run').exec();
+  return run('npm test').exec();
 });
 
 gulp.task('testWatch', () => {
@@ -88,6 +85,11 @@ gulp.task('testWatch', () => {
 gulp.task('testReload', () => {
   gulp.src(paths.specRunner)
     .pipe(connect.reload());
+});
+
+gulp.task('bower', function () {
+  return bower('./bower_components')
+    .pipe(gulp.dest('public/lib'));
 });
 
 gulp.task('default',

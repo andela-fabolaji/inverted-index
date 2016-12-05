@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const app = angular.module("InvertedIndex", []);
 
@@ -6,68 +6,74 @@ app.controller('MainController', ['$scope', ($scope) => {
   $scope.indexObj = new InvertedIndex();
   $scope.uploadedFiles = {};
   $scope.indexedFiles = {};
+  $scope.searchedFiles = {};
   $scope.showIndex = false;
   $scope.showResult = false;
-
+  $scope.getCount = (num) => {
+    return new Array(num);
+  };
+  // Create index
   $scope.createIndex = () => {
     let selectedFile = $scope.selectedFile;
-
     if (!selectedFile) {
-      alert('no file selected'); return;
+      displayMsg('Error! No file selected');
     }
-
     if ($scope.indexObj.createIndex(selectedFile, $scope.uploadedFiles[selectedFile])) {
       $scope.showIndex = true;
-
-      // object to hold details about indexed file
+      $scope.showResult = false;
       $scope.indexedFiles[selectedFile] = {
         name: selectedFile,
         indeces: $scope.indexObj.getIndex(selectedFile),
-        docNum: $scope.indexObj.getDocCount(selectedFile),
-        isIndexed: true
+        docNum: $scope.indexObj.indexedFiles[selectedFile]
       }
     } else {
-      alert('Invalid File type');
+      displayMsg(`Error! ${selectedFile} is not properly formatted`);
     }
   };
 
+  // Search Index
   $scope.searchIndex = () => {
-    let file = $scope.searchFile || null;
-    let searchTerm = $scope.searchTerm;
-
-    console.log(`Search for ${searchTerm} in ${file}`);
+    let file = $scope.searchFile || null,
+      searchTerm = $scope.searchTerm;
     if (!searchTerm) {
-      alert('I can\'t  search for nothing! Please type in your search term')
+      displayMsg('Error! Please type in your search term');
+    } else if (Object.keys($scope.indexedFiles).length === 0) {
+      displayMsg('No files indexed yet');
+    } else {
+      $scope.result = $scope.indexObj.searchIndex(file, searchTerm);
     }
+
+    for (let eachResult in $scope.result) {
+      $scope.searchedFiles[eachResult] = {
+        name: eachResult,
+        indeces: $scope.result[eachResult],
+        docNum: $scope.indexObj.indexedFiles[eachResult]
+      }
+    }
+    $scope.showIndex = false;
+    $scope.showResult = true;
 
   };
-
   $scope.verifyFileType = (file) => {
-    if (!file.name.toString().endsWith('.json')) {
-      alert('Error, it should be a json file');
-      return;
+    const exp = /\.json/;
+    if (!exp.test(file.name.toString())) {
+      displayMsg(`Error! ${file.name} is not a json file`);
+      return 0;
     }
-
     const reader = new FileReader();
     let fileContent;
-
     reader.readAsText(file);
     reader.onload =  (loadEvent) => {
       let fileContent = loadEvent.target.result;
-
-      try {
-        fileContent = JSON.parse(fileContent);
-      } catch(e) {
-        return 'invalid json file';
-      }
-
       $scope.uploadedFiles[file.name] = fileContent;
-      // console.log()$scope.uploadedFiles[file.name];
-      // console.log(file.name);
       $scope.$apply();
     };
-
   };
+
+  function displayMsg (msg) {
+    $scope.message = msg;
+    $('.modal').modal();
+  }
 
   let fileUpload = document.getElementById('upload');
 
