@@ -74,16 +74,12 @@ class InvertedIndex {
    * @param {String} searchTerm
    * @return {Object} result
    */
-  searchIndex(fileName, searchTerm) {
-
+  searchIndex(fileName, ...searchTerm) {
     const result = {};
     let termsArr = [];
+    let query = this.sanitizeSearchQuery(...searchTerm);
 
-    if (Array.isArray(searchTerm)) {
-      searchTerm = searchTerm.join(',').split(',').join(' ');
-    }
-
-    termsArr = this.tokenize(searchTerm);
+    termsArr = this.tokenize(query);
 
     if (!fileName) {
       for (let eachFile in this.indices) {
@@ -103,12 +99,11 @@ class InvertedIndex {
    * @return {Bool} || {Array} flag
    */
   verifyFile(file) {
-
-     try {
-        file = JSON.parse(file);
-      } catch(e) {
-        return false;
-      }
+    try {
+      file = JSON.parse(file);
+    } catch (e) {
+      return false;
+    }
 
     let flag = file;
 
@@ -123,6 +118,25 @@ class InvertedIndex {
     } else flag = false;
 
     return flag;
+  }
+
+  /**
+   * sanitizeSearchQuery private method takes a spread
+   * argument and returns a single string
+   *
+   * @param {Object} searchTerm
+   * @return {String} query
+   */
+  sanitizeSearchQuery(searchTerm) {
+    let query = '';
+
+    for (let i = 0; i < arguments.length; i++) {
+      if (Array.isArray(arguments[i])) {
+        arguments[i].join(' ');
+      }
+      query += arguments[i] + ' ';
+    }
+    return query.split(',').join(' ');
   }
 
   /**
