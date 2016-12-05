@@ -1,5 +1,5 @@
 # Inverted Index
-# [![Build Status](https://travis-ci.org/andela-fabolaji/inverted-index.svg?branch=develop)](https://travis-ci.org/andela-fabolaji/inverted-index) [![Coverage Status](https://coveralls.io/repos/github/andela-fabolaji/inverted-index/badge.svg?branch=master)](https://coveralls.io/github/andela-fabolaji/inverted-index?branch=master) [![Code Climate](https://codeclimate.com/github/andela-fabolaji/inverted-index/badges/gpa.svg)](https://codeclimate.com/github/andela-fabolaji/inverted-index)
+# [![Build Status](https://travis-ci.org/andela-fabolaji/inverted-index.svg?branch=develop)](https://travis-ci.org/andela-fabolaji/inverted-index) [![Coverage Status](https://coveralls.io/repos/github/andela-fabolaji/inverted-index/badge.svg?branch=master)](https://coveralls.io/github/andela-fabolaji/inverted-index?branch=master)
 
 Inverted index is designed to allow very fast full-text searches. An inverted index consists of a list of all the unique words that appear in any document, and for each word, a list of the documents in which it appears.
 
