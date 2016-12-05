@@ -1,11 +1,11 @@
-- Interface should be fully responsive
-- Repo badges should be updated and displayed
+- Interface should be fully responsive D
+- Repo badges should be updated and displayed D
 - Remove all unused dependencies D
 - Use arrow functions (es6) D
 - Nitpick prefer instanceof to typeof D
-- Use const in line 92 of test D
+- Use const in line 92 of test ------------
 - Test 2 of populate index should test that each token returns its indices D
 - Search results should have consistent data types D
 - Nitpick remove redundant tests D
 - Use strict not needed if linting is active D
-- Indentation and variable declarations - invertedIndex class D
+- Indentation and variable declarations - invertedIndex class ------------------

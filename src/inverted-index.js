@@ -103,12 +103,11 @@ class InvertedIndex {
    * @return {Bool} || {Array} flag
    */
   verifyFile(file) {
-
-     try {
-        file = JSON.parse(file);
-      } catch(e) {
-        return false;
-      }
+    try {
+      file = JSON.parse(file);
+    } catch (e) {
+      return false;
+    }
 
     let flag = file;
 
