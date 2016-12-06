@@ -87,7 +87,7 @@ describe('Inverted Index class test suite', () => {
       });
 
       it('Should return correct index', () => {
-        let key = Object.keys(invIndex.getIndex('file1'))[0];
+        const key = Object.keys(invIndex.getIndex('file1'))[0];
         expect(invIndex.getIndex('file1')[key].length).toEqual(1);
       });
 
@@ -102,7 +102,7 @@ describe('Inverted Index class test suite', () => {
    */
   describe('Get index', () => {
     it('Should return the correct index of any document passed to it', () => {
-      let result = invIndex.getIndex('file1');
+      const result = invIndex.getIndex('file1');
       expect(result).toEqual(
         {
           alice: [ 0 ],
